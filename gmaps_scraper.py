@@ -12,8 +12,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 # === CONFIG ===
 # INPUT_FILE = "outlet_nolatlong.csv"
-INPUT_FILE = "unfinished_outlets.csv"
-OUTPUT_FILE = "unfinished_outlets_SLM.csv"
+INPUT_FILE = "mini_outlet_loc.csv"
+OUTPUT_FILE = "mini_outlet_loc_SLM.csv"
 CHROMEDRIVER_PATH = "chromedriver.exe"  # adjust path if needed
 SAVE_INTERVAL = 50  # save progress every 50 rows
 WAIT_LOAD = 5  # seconds to wait after search
@@ -47,9 +47,9 @@ else:
 for i, row in df.iterrows():
     index = len(latitudes) + 1
     name = str(row["NAMAOUTLET"])
-    # address = str(row["ALAMAT"])
-    # query = f"{name}, {address}"
-    query = f"{name}"
+    address = str(row["ALAMAT"])
+    query = f"{name}, {address}"
+    # query = f"{name}"
 
     print(f"\nSearching {index}/{len(df)}: {query}")
     driver.get("https://www.google.com/maps")
@@ -108,3 +108,4 @@ final_df.to_csv(OUTPUT_FILE, index=False, encoding="utf-8-sig")
 print("\nDone! All results saved to:", OUTPUT_FILE)
 
 driver.quit()
+
